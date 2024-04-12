@@ -1,23 +1,17 @@
-# Use official Node.js image as the base image
-FROM node:alpine
+FROM node:v20.12.1
 
-# Set the working directory in the container
 WORKDIR /app
 
-# Copy package.json and package-lock.json to the container
-COPY package*.json ./
+COPY package*.json .
 
-# Install dependencies
-RUN npm install
-
-# Copy the rest of the application code to the container
 COPY . .
 
-# Build the Next.js application
+RUN npm install
+
+
 RUN npm run build
 
-# Expose the port on which Next.js will run (default is 3000)
+
 EXPOSE 3000
 
-# Command to run the application
-CMD ["npm", "start"]
+CMD ["npm", "run", "start"]
